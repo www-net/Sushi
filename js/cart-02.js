@@ -70,7 +70,5 @@ window.addEventListener(`click`, function (event) {
     }
     // Сбрасываем счетчик добавленного товара
     card.querySelector(`[data-counter]`).innerText = `1`;
-
-
   }
 });
