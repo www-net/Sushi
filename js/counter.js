@@ -33,6 +33,9 @@ window.addEventListener(`click`, function (event) {
     } else if (event.target.closest(`.cart-wrapper`) && parseInt(counter.innerText) === 1) {
       // Удаляем товар из корзины
       event.target.closest(`.cart-item`).remove();
+
+    // Отображение статуса корзины Пустая / Полная
+      toggleCartStatus();
     }
   }
 })
