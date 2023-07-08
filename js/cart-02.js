@@ -19,14 +19,11 @@ window.addEventListener(`click`, function (event) {
       price: card.querySelector(`.price__currency`).innerText,
       count: card.querySelector(`[data-counter]`).innerText,
     }
-    console.log(productInfo);
-
-    // Собранные данные подставим в шаблон для товара в корзине
-
 
     //  Создание элемента товара в корзине
     const createCartItem = (prodInfo) => {
       const { id, imgSrc, title, itemsInBox, weight, price, count } = prodInfo;
+      // Собранные данные подставим в шаблон для товара в корзине
       const cartItemHTML = (`
       <div class="cart-item" data-id="${id}">
       <div class="cart-item__top">
@@ -57,10 +54,23 @@ window.addEventListener(`click`, function (event) {
             </div>
           </div>
           `);
-          cartWrapper.insertAdjacentHTML("afterbegin", cartItemHTML);
-        }
-        // Отобразим товар в корзине
-        createCartItem(productInfo);
-      
+      cartWrapper.insertAdjacentHTML("afterbegin", cartItemHTML);
+    };
+
+    // Проверим есть ли уже такой товар в корзине
+    const itemIncart = cartWrapper.querySelector(`[data-id="${productInfo.id}"]`);
+    // Если товар есть в корзине
+    if (itemIncart) {
+      const counterElement = itemIncart.querySelector(`[data-counter]`);
+      counterElement.innerText = parseInt(counterElement.innerText) + parseInt(productInfo.count);
+
+    } else {
+      // Если товара нет, то отобразим товар в корзине
+      createCartItem(productInfo);
+    }
+    // Сбрасываем счетчик добавленного товара
+    card.querySelector(`[data-counter]`).innerText = `1`;
+
+
   }
 });
