@@ -34,8 +34,18 @@ window.addEventListener(`click`, function (event) {
       // Удаляем товар из корзины
       event.target.closest(`.cart-item`).remove();
 
-    // Отображение статуса корзины Пустая / Полная
+      // Отображение статуса корзины Пустая / Полная
       toggleCartStatus();
+
+      // Пересчет общей суммы товаров в корзине
+      calcCartPriceAndDelivery();
+
     }
   }
+
+  // Проверяем, что нажал на + или - внутри корзины
+  if (event.target.hasAttribute(`data-action`) && event.target.closest(`.cart-wrapper`)) {
+    // Пересчитываем общуюю стоимость в корзине
+    calcCartPriceAndDelivery();
+  };
 })

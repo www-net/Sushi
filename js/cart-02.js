@@ -20,6 +20,8 @@ window.addEventListener(`click`, function (event) {
       count: card.querySelector(`[data-counter]`).innerText,
     }
 
+    console.dir(productInfo);
+
     //  Создание элемента товара в корзине
     const createCartItem = (prodInfo) => {
       const { id, imgSrc, title, itemsInBox, weight, price, count } = prodInfo;
@@ -69,10 +71,14 @@ window.addEventListener(`click`, function (event) {
       // Если товара нет, то отобразим товар в корзине
       createCartItem(productInfo);
     }
+
     // Сбрасываем счетчик добавленного товара
     card.querySelector(`[data-counter]`).innerText = `1`;
 
     // Отображение статуса корзины Пустая / Полная
     toggleCartStatus();
+
+    // Пересчет общей суммы в корзине
+    calcCartPriceAndDelivery();
   }
 });
